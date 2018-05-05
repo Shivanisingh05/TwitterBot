@@ -13,6 +13,7 @@ twitter = Twitter(auth = twitter_oauth)
 def get_tweets(query):
     tweets = twitter.search.tweets(q='#' +query, count=100)
     return tweets
+
 def get_num_followers(query):
     num_followers = 0
     tweets = get_tweets(query)
@@ -21,6 +22,7 @@ def get_num_followers(query):
         print each_tweet['user']['followers_count']
         num_followers += each_tweet['user']['followers_count']
     return  num_followers
+
 def sentiments(query):
     oauth = tweepy.OAuthHandler(API_KEY, API_SECRET)
     oauth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
@@ -30,6 +32,7 @@ def sentiments(query):
         print(tweet.text)
         analyse = TextBlob(tweet.text)
         print(analyse.sentiment)
+        print(analyse.detect_language())
         print("######################################################################################################")
 
 
@@ -57,7 +60,7 @@ def main():
 
     elif user_choice == 4:
         user_input = raw_input("Enter the has tag: ")
-        print "\n\nTotal number of people who might have seen this has tag are: %s" % (sentiments(user_input))
+        (sentiments(user_input))
     elif user_choice == 5:
        pass
        #user_input = raw_input("Enter the has tag.")
