@@ -1,4 +1,7 @@
 from twitter import Twitter, OAuth
+import tweepy
+import textblob
+from textblob import TextBlob
 API_KEY = 'OZdisl10940KgoyOOiVXheGv5'
 API_SECRET = 'jWXndj1SMWMnP1ISvU0lj2fyt7tcEQUJV5O6ziyFB52HljqKJU'
 ACCESS_TOKEN = '990982189818044417-3V8KzMJEOhTR9b4PEzkUXpl4b9izCw2'
@@ -18,6 +21,17 @@ def get_num_followers(query):
         print each_tweet['user']['followers_count']
         num_followers += each_tweet['user']['followers_count']
     return  num_followers
+def sentiments(query):
+    oauth = tweepy.OAuthHandler(API_KEY, API_SECRET)
+    oauth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    api = tweepy.API(oauth)
+    public_tweets = api.search(query)
+    for tweet in public_tweets:
+        print(tweet.text)
+        analyse = TextBlob(tweet.text)
+        print(analyse.sentiment)
+        print("######################################################################################################")
+
 
 def main():
  while (True):
@@ -35,15 +49,15 @@ def main():
         user_input = raw_input("Enter the has tag: ")
         print "\n\nTotal number of people who might have seen this has tag are: %s" % (get_num_followers(user_input))
     elif user_choice == 2:
-        user_input = raw_input("Enter the has tag.")
+        user_input = raw_input("Enter the has tag: ")
 
     elif user_choice == 3:
         pass
         #user_input = raw_input("Enter the has tag.")
 
     elif user_choice == 4:
-        user_input = raw_input("Enter the has tag.")
-
+        user_input = raw_input("Enter the has tag: ")
+        print "\n\nTotal number of people who might have seen this has tag are: %s" % (sentiments(user_input))
     elif user_choice == 5:
        pass
        #user_input = raw_input("Enter the has tag.")
