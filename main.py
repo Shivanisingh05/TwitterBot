@@ -111,38 +111,7 @@ def llt(query):
     tz = {}
     for tweet in public_tweets ['statuses']:
 
-        loc = [tweet['user']['location']]
-        lan = [tweet['user']['lang']]
-        tz1 =  tweet['user']['created_at']
-        # for f in loc:
-        #     if f not in lo:
-        #         loc.append(f)
-        # num = Counter(loc).most_common(2)
-        # print num
-        if loc in lo:
-            lo[loc] +=1
-        else:
-            lo[loc] = 1
-        if lan in la:
-            la[lan] += 1
-        else:
-            la[lan] = 1
-        if tz1 in tz:
-            tz[tz1] += 1
-        else:
-            tz[tz1] = 1
-        if tz == None or tz == "" or tz[tz1] == 1:
-            del tz[None]
-            del tz[""]
-            del tz[:][1]
-        if lo == None or lo == "" or lo[loc] == 1:
-            del lo[None]
-            del lo[""]
-            del lo[:][1]
-        if la == None or la == "" or la[lan] == 1:
-            del la[None]
-            del la[""]
-            del la[:][1]
+
         print (colored("Time Zone: ", color='red', attrs=['bold']) + tweet['user']['created_at'])
         print (colored("Language: ", color='red', attrs=['bold']) + tweet['user']['lang'])
         print (colored("Location: ", color='red', attrs=['bold']) + tweet['user']['location'])
