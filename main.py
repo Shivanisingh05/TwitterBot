@@ -15,10 +15,10 @@ stop_words = set(stopwords.words('english'))
 print ("\033[35;40m*************************************************************************************************************************************************************************************")
 print (colored("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWELCOME TO TWITTERBOT", color= 'red', attrs=['bold']))
 
-API_KEY = 'OZdisl10940KgoyOOiVXheGv5'
-API_SECRET = 'jWXndj1SMWMnP1ISvU0lj2fyt7tcEQUJV5O6ziyFB52HljqKJU'
-ACCESS_TOKEN = '990982189818044417-3V8KzMJEOhTR9b4PEzkUXpl4b9izCw2'
-ACCESS_TOKEN_SECRET = 'ndU8rHLVbIE75GkrJz5PvVTuXXFsYerYEdoRSf0ePtdUF'
+API_KEY = ''
+API_SECRET = ''
+ACCESS_TOKEN = ''
+ACCESS_TOKEN_SECRET = ''
 
 twitter_oauth = OAuth(ACCESS_TOKEN, ACCESS_TOKEN_SECRET, API_KEY, API_SECRET)
 twitter = Twitter(auth = twitter_oauth)
@@ -71,7 +71,7 @@ def get_sentiments(query):
     p = 0
     n=0
     ne = 0
-    set_api_key('kQmnPQVgdkzuRHaPpQJgqXLAmWlYV6GCx62z8LuitUQ')
+    set_api_key('')
     get_api_key()
     public_tweets = api.search(query)
     for tweet in public_tweets:
