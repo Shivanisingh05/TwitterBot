@@ -12,13 +12,15 @@ from nltk import Counter
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 
-print ("\033[35;40m*************************************************************************************************************************************************************************************")
+print ("\n")
+print (colored("*******************************************************************************************************"
+               "*****************************************************************************",color='red', on_color='on_grey'))
 print (colored("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWELCOME TO TWITTERBOT", color= 'red', attrs=['bold']))
 
-API_KEY = ''
-API_SECRET = ''
-ACCESS_TOKEN = ''
-ACCESS_TOKEN_SECRET = ''
+API_KEY = 'OZdisl10940KgoyOOiVXheGv5'
+API_SECRET = 'jWXndj1SMWMnP1ISvU0lj2fyt7tcEQUJV5O6ziyFB52HljqKJU'
+ACCESS_TOKEN = '990982189818044417-3V8KzMJEOhTR9b4PEzkUXpl4b9izCw2'
+ACCESS_TOKEN_SECRET = 'ndU8rHLVbIE75GkrJz5PvVTuXXFsYerYEdoRSf0ePtdUF'
 
 twitter_oauth = OAuth(ACCESS_TOKEN, ACCESS_TOKEN_SECRET, API_KEY, API_SECRET)
 twitter = Twitter(auth = twitter_oauth)
@@ -31,10 +33,13 @@ api = tweepy.API(oauth)
 #FOR DISPLAYING MY DETAILS
 def details():
     user = api.me()
-    print (colored("\nMY DETAILS", color='red', attrs=['underline']))
-    print 'Name: '  + user.name
-    print 'Location: ' + user.location
-    print 'Friends: ' + str(user.friends_count)
+    print (colored("*****************************************************************************************"
+                   "********************************************************************************************",
+                   color='green'))
+    print (colored("MY TWITTER ACCOUNT DETAILS", color='cyan', attrs=['underline']))
+    print (colored("Name: ", color='red', attrs=['bold']) + user.name)
+    print (colored("Location: ", color='red', attrs=['bold']) + user.location)
+    print (colored("Friends: ", color='red', attrs=['bold']) +str(user.friends_count) )
     print (colored("*****************************************************************************************"
                    "********************************************************************************************",
                    color='green'))
@@ -56,10 +61,9 @@ def get_num_followers(query):
     #print type(tweets)
     for each_tweet in tweets['statuses']:
         print (colored("*****************************************************************************************"
-               "********************************************************************************************", color= 'green'))
-        print "Name: " + each_tweet['user']['screen_name']
-        print "Followers: " + str(each_tweet['user']['followers_count'])
-        # print each_tweet['user']['location']
+               "********************************************************************************************", color= 'cyan'))
+        print (colored("Name: ", color='red' )+ each_tweet['user']['screen_name'])
+        print (colored("Followers: ", color='red') + str(each_tweet['user']['followers_count']))
         num_followers += each_tweet['user']['followers_count']
     return  num_followers
 
@@ -71,7 +75,7 @@ def get_sentiments(query):
     p = 0
     n=0
     ne = 0
-    set_api_key('')
+    set_api_key('kQmnPQVgdkzuRHaPpQJgqXLAmWlYV6GCx62z8LuitUQ')
     get_api_key()
     public_tweets = api.search(query)
     for tweet in public_tweets:
@@ -106,12 +110,7 @@ def get_sentiments(query):
 def llt(query):
 
     public_tweets = get_tweets(query)
-    lo = {}
-    la = {}
-    tz = {}
     for tweet in public_tweets ['statuses']:
-
-
         print (colored("Time Zone: ", color='red', attrs=['bold']) + tweet['user']['created_at'])
         print (colored("Language: ", color='red', attrs=['bold']) + tweet['user']['lang'])
         print (colored("Location: ", color='red', attrs=['bold']) + tweet['user']['location'])
@@ -130,7 +129,7 @@ def Comparision():
     count = 0
     new_tweets = api.user_timeline(screen_name = '@narendramodi', count = 200, tweet_mode='extended')
     for tweet in new_tweets:
-        print(tweet.full_text)
+        #print(tweet.full_text)
         text = tweet.full_text
         temp = []
         temp.append(text)
@@ -151,7 +150,7 @@ def Comparision():
     count1 = 0
     new_tweets = api.user_timeline(screen_name='@realDonaldTrump', count=200, tweet_mode='extended')
     for tweet in new_tweets:
-        print(tweet.full_text)
+        #print(tweet.full_text)
         text = tweet.full_text
         temp = []
         temp.append(text)
@@ -160,7 +159,7 @@ def Comparision():
         word = words.split()
         for i in word:
             i = i.lower()
-            if i == "India" or i == "INDIA":
+            if i == "India":
                 count1 = count1 + 1
     print "Number of times Donald Trump mentioned 'India': ", count1
     print (colored("*****************************************************************************************"
@@ -186,7 +185,6 @@ def Topusage():
             if w not in stop_words:
                 word1.append(w)
         num = Counter(word1).most_common(10)
-        #print word1
         print(num)
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -196,15 +194,20 @@ def Topusage():
 def tweet_status():
     status = raw_input("Enter your new tweet: ")
     api.update_status(status)
+    print("Tweeted: {}".format(status))
+    print (colored("*****************************************************************************************"
+                   "********************************************************************************************",
+                   color='red'))
 
 #-----------------------------------------------------------------------------------------------------------------------
 
 # MAIN FUNCTION
 
 def main():
- print (colored("*****************************************************************************************"
-                   "********************************************************************************************",
-                   color='red'))
+ print (colored(
+        "*******************************************************************************************************"
+        "*****************************************************************************", color='red',
+        on_color='on_grey'))
  while (True):
 
      user_choice = input("\nWhat would you like to do? \n"
@@ -222,7 +225,6 @@ def main():
          details()
 
      elif user_choice == 2:
-        print ("Chosen to count the number of followers.")
         user_input = raw_input("Enter the has tag: ")
         print "\n Maximum number of people who might have seen this has tag are: %s " % (get_num_followers(user_input))
 
@@ -231,22 +233,21 @@ def main():
          get_sentiments(user_input)
 
      elif user_choice == 4:
-        user_input = raw_input("Enter the has tag: ")
-        llt(user_input)
+         user_input = raw_input("Enter the has tag: ")
+         llt(user_input)
 
      elif user_choice == 5:
-        Comparision()
+         Comparision()
 
      elif user_choice == 6:
-          Topusage()
+         Topusage()
 
      elif user_choice == 7:
-
          tweet_status()
 
      elif user_choice == 8:
        break
      else:
-        print("wrong choice try again.")
+        print("Wrong choice. Try again.")
         exit()
 main()
